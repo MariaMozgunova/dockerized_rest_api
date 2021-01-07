@@ -1,0 +1,41 @@
+version: '3.3'
+
+volumes:
+  postgres_data:
+  static:
+
+services:
+  db:
+    image: postgres:12.4
+    volumes: 
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env
+    networks:
+      - proxy_pass
+
+  nginx:
+    build: nginx/
+    ports:
+      - 80:80
+    volumes: 
+      - static:/static/
+    networks:
+      - proxy_pass
+    
+
+  web:
+    build: .
+    restart: always
+    hostname: web
+    depends_on:
+      - db
+      - nginx
+    env_file:
+      - ./.env
+    networks:
+      - proxy_pass
+
+networks:
+  proxy_pass:
+    driver: bridge

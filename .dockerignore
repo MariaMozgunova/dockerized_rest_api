@@ -1,0 +1,10 @@
+docker-compose.yaml
+Dockerfile
+
+README.md
+
+tests/
+pytest.ini
+
+.env
+.env.template
