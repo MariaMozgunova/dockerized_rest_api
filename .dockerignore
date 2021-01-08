@@ -2,6 +2,8 @@ docker-compose.yaml
 Dockerfile
 
 README.md
+nginx/
+.github/
 
 tests/
 pytest.ini

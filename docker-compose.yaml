@@ -11,31 +11,24 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./.env
-    networks:
-      - proxy_pass
 
   nginx:
     build: nginx/
     ports:
-      - 80:80
+      - "${HOST_IP}:80:80"
     volumes: 
       - static:/static/
-    networks:
-      - proxy_pass
+    env_file:
+      - ./.env
     
 
   web:
     build: .
     restart: always
-    hostname: web
+    ports:
+      - "${HOST_IP}:8000:8000"
     depends_on:
       - db
       - nginx
     env_file:
       - ./.env
-    networks:
-      - proxy_pass
-
-networks:
-  proxy_pass:
-    driver: bridge

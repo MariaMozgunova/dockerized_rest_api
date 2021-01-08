@@ -1,9 +1,7 @@
-FROM nginx:1.19.6-alpine
+FROM nginx:1.19.6-alpine-perl
 
-# RUN apt-get -y update && apt-get install -y systemd sudo && mkdir static
+RUN apk add --no-cache nginx-mod-http-perl
 
 COPY /static /static
 
 COPY nginx.conf /etc/nginx/nginx.conf
-
-# CMD sudo service nginx.service start 
