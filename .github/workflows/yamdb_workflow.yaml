@@ -65,7 +65,7 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         source: "docker-compose.yaml"
         target: "yamdb"
-    - name: Execute remote ssh commands to deploy yamdb servise
+    - name: Execute remote ssh commands to deploy yamdb service
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.HOST }}
