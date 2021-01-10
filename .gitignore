@@ -4,6 +4,7 @@ venv/
 .venv
 .venv/
 .env
+.env.template
 
 __pycache__/
 *.py[cod]
@@ -21,3 +22,5 @@ static/
 posts/static/
 
 db.sqlite3
+
+.github/
