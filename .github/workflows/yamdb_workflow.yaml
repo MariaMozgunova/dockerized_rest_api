@@ -22,8 +22,6 @@ jobs:
         run: flake8 --exclude migrations,tests .
       - name: Test with pytest
         run: pytest 
-      - name: Collect static
-        run: python manage.py collectstatic 
 
 
   build_and_push_to_docker_hub:
