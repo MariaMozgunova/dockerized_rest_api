@@ -10,8 +10,8 @@ services:
     volumes: 
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_USER
       - POSTGRES_PASSWORD
+      - POSTGRES_USER
 
   nginx:
     build: nginx/
@@ -35,11 +35,11 @@ services:
       - nginx
     environment:
       - DB_ENGINE
-      - DB_NAME
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
       - DB_HOST
+      - DB_NAME
       - DB_PORT
-      - SECRET_KEY
       - DEBUG
       - HOST
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - SECRET_KEY
