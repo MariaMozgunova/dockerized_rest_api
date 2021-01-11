@@ -85,7 +85,8 @@ jobs:
           cd yamdb
           sudo docker-compose pull
           sudo docker stop $(sudo docker ps -a -q)
-          sudo docker-compose up
+          sudo docker-compose up -e DB_ENGINE -e DB_HOST -e DB_NAME \
+               -e DB_PORT -e DEBUG -e HOST -e POSTGRES_PASSWORD -e POSTGRES_USER -e SECRET_KEY
 
 
   notify:
