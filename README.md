@@ -1,15 +1,18 @@
+<details>
+<summary>Документация (ru)</summary>
+<br>
+
 ### API Yamdb 
 
-В этом проекты вы найдёте Dockerfile и docker-compose.yaml. Последний указанный файл запускает два контейнера: API отзывов о фильмах, книгах и песнях - yamdb, и базу данных PostgreSQL.
+Докеризированный сервис API отзывов о фильмах, книгах и песнях. Nginx раздаёт статику, Gunicorn передаёт запросы Django-приложению. Данные хранятся в базе данных PostgreSQL.
 
 ### Статус
 
 ![CI/CD workflow](https://github.com/MariaMozgunova/yamdb_final/workflows/deploy_workflow/badge.svg)
 
-
 ### Запуск приложения
 
-Эта инструкция поможет запустить сервис на удаленном сервере.
+Эта инструкция поможет вам запустить сервис на удаленном сервере.
 
 #### Предварительные требования использования приложения
 - сервер с public ip и установленной операционной системой Ubuntu;
@@ -19,16 +22,19 @@
 
 #### Настройка сервера
 1. Подключитесь к своему серверу по ssh (`ssh <пользователь_сервера>@<public_ip_сервера>`, затем введите passphrase от ssh key);
-2. обновите индекс пакетов APT: `sudo apt update`;
-3. Теперь обновите существующие в системе пакеты и установите обновления: `sudo apt upgrade -y`;
-4. Установите Docker: `sudo apt install -y docker.io`;
-5. выполните команду для автоматического запуска Docker'а: `sudo systemctl enable docker`;
+2. Обновите индекс пакетов APT: `apt-get update`;
+3. Теперь обновите существующие в системе пакеты и установите обновления: `apt-get upgrade -y`;
+4. Установите пакет sudo, Docker и docker-compose: `apt-get install -y docker.io docker-compose sudo`;
+5. Выполните команду для автоматического запуска Docker'а: `sudo systemctl enable docker`;
 
 #### Запуск сервиса
 1. Создайте fork проекта;
 2. В fork перейдите в Settings > Secrets и сконфигурируйте следующие константы для работы workflow:
    - `DOCKER_USERNAME` - логин от DockerHub;
    - `DOCKER_PASSWORD` - пароль от DockerHub;
+   - `DB_ENGINE` - система управления базой данных;
+   - `DB_HOST` - путь до базы данных (в данном случае указываем название контейнера, в котором она расположена - `db`);
+   - `DB_NAME` - название базы данных, в которой будут сохраняться записи;
    - `HOST` - ip сервера;
    - `SSH_KEY` - private ssh key для подключения к серверу;
    - `USER` - пользователь сервера;
@@ -69,3 +75,11 @@
 В контейнере приложения выполните следующие команды:
    - `python manage.py createsuperuser`;
    - введите почту и придумайте пароль.
+</details>
+
+<details>
+<summary>Docs (en)</summary>
+<br>
+Well, you asked for it!
+</details>
+
