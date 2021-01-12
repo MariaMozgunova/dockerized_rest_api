@@ -18,7 +18,7 @@ services:
     volumes:
       - static:${STATIC_DIR}/static/
     ports:
-      "178.154.235.5:80:80"
+      - "178.154.235.5:80:80"
     
 
   web:
