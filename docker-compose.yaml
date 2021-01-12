@@ -16,8 +16,6 @@ services:
   nginx:
     # build: nginx/
     image: mariamozgunova/custom-nginx:latest
-    ports:
-      - "${HOST}:80:80"
     volumes:
       - static:${STATIC_DIR}/static/
     environment:
@@ -26,10 +24,7 @@ services:
 
   web:
     # build: .
-    image: mariamozgunova/yamdb-final:latest
-    restart: always
-    ports:
-      - "${HOST}:8000:8000"
+    container_name: "yamdb-web-final"
     depends_on:
       - db
       - nginx
@@ -43,3 +38,5 @@ services:
       - POSTGRES_USER
       - POSTGRES_PASSWORD
       - SECRET_KEY
+    image: mariamozgunova/yamdb-final:latest
+    restart: always
