@@ -74,20 +74,10 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        source: "docker-compose.yaml"
+        source: "docker-compose.yaml,.env"
         target: "yamdb"
     - name: Execute remote ssh commands to deploy yamdb service
       uses: appleboy/ssh-action@master
-      env:
-        # DB_ENGINE: ${{ secrets.DB_ENGINE }}
-        # DB_HOST: ${{ secrets.DB_HOST }}
-        # DB_NAME: ${{ secrets.DB_NAME }}
-        # DB_PORT: ${{ secrets.DB_PORT }}
-        # DEBUG: ${{ secrets.DEBUG }}
-        HOST: ${{ secrets.HOST }}
-        POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-        # SECRET_KEY: ${{ secrets.SECRET_KEY }}
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
@@ -96,8 +86,8 @@ jobs:
         script: |
           cd yamdb
           sudo docker-compose pull
-          sudo docker stop $(sudo docker ps -a -q)
-          HOST=$HOST POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_USER=$POSTGRES_USER sudo docker-compose up
+          sudo docker rm -f $(sudo docker ps -a -q)
+          sudo docker-compose up
 
 
   notify:

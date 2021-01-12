@@ -3,7 +3,7 @@ env/
 venv/
 .venv
 .venv/
-.env
+# .env
 .env.template
 
 __pycache__/
