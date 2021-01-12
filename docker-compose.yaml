@@ -14,29 +14,17 @@ services:
       - POSTGRES_USER
 
   nginx:
-    # build: nginx/
     image: mariamozgunova/custom-nginx:latest
     volumes:
       - static:${STATIC_DIR}/static/
-    # environment:
-    #   - HOST
+    ports:
+      "178.154.235.5:80:80"
     
 
   web:
-    # build: .
     container_name: "yamdb-web-final"
     depends_on:
       - db
       - nginx
-    # environment:
-    #   - DB_ENGINE
-    #   - DB_HOST
-    #   - DB_NAME
-    #   - DB_PORT
-    #   - DEBUG
-    #   - HOST
-    #   - POSTGRES_USER
-    #   - POSTGRES_PASSWORD
-    #   - SECRET_KEY
     image: mariamozgunova/yamdb-final:latest
     restart: always
