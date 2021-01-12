@@ -18,8 +18,8 @@ services:
     image: mariamozgunova/custom-nginx:latest
     volumes:
       - static:${STATIC_DIR}/static/
-    environment:
-      - HOST
+    # environment:
+    #   - HOST
     
 
   web:
@@ -28,15 +28,15 @@ services:
     depends_on:
       - db
       - nginx
-    environment:
-      - DB_ENGINE
-      - DB_HOST
-      - DB_NAME
-      - DB_PORT
-      - DEBUG
-      - HOST
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
-      - SECRET_KEY
+    # environment:
+    #   - DB_ENGINE
+    #   - DB_HOST
+    #   - DB_NAME
+    #   - DB_PORT
+    #   - DEBUG
+    #   - HOST
+    #   - POSTGRES_USER
+    #   - POSTGRES_PASSWORD
+    #   - SECRET_KEY
     image: mariamozgunova/yamdb-final:latest
     restart: always
