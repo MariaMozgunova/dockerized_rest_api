@@ -17,8 +17,8 @@ services:
     image: mariamozgunova/custom-nginx:latest
     volumes:
       - static:${STATIC_DIR}/static/
-    # ports:
-    #   - "178.154.235.5:80:80"
+    ports:
+      - "178.154.235.5:80:80"
     
 
   web:
