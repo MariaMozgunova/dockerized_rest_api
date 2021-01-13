@@ -3,7 +3,7 @@
    
 ### API Yamdb 
 
-![CI/CD workflow](https://github.com/MariaMozgunova/yamdb_final/workflows/deploy_workflow/badge.svg)
+![CI/CD workflow](https://github.com/MariaMozgunova/yamdb_final/workflows/workflow/badge.svg)
 
 Докеризированный сервис API отзывов о фильмах, книгах и песнях. Nginx раздаёт статику, Gunicorn передаёт запросы Django-приложению. Данные хранятся в базе данных PostgreSQL.
 
@@ -84,7 +84,7 @@
    
 ### API Yamdb 
 
-![CI/CD workflow](https://github.com/MariaMozgunova/yamdb_final/workflows/deploy_workflow/badge.svg)
+![CI/CD workflow](https://github.com/MariaMozgunova/yamdb_final/workflows/workflow/badge.svg)
 
 This is the dockerized API service storing reviews about books, music and films. Nginx delivers static files and proxies other requests to Django app. All data is stored in PostgreSQL database.  
 
