@@ -3,6 +3,7 @@ version: '3.3'
 volumes:
   postgres_data:
   static:
+  media:
 
 services:
   db:
@@ -16,7 +17,8 @@ services:
   nginx:
     image: mariamozgunova/custom-nginx:latest
     volumes:
-      - static:${STATIC_DIR}/static/
+      - static:${ROOT}/static/
+      - media:${ROOT}/media/
     ports:
       - "80:80"
     
