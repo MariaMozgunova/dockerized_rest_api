@@ -60,6 +60,9 @@ jobs:
     needs: tests
     steps:
     - uses: actions/checkout@v2
+    - uses: isbang/compose-action@v0.1
+      with:
+        compose-file: './docker-compose.yml'
     # - name: Copy docker-compose.yaml to server via SSH
     #   uses: appleboy/scp-action@master
     #   with:
@@ -68,15 +71,15 @@ jobs:
     #     key: ${{ secrets.SSH_KEY }}
     #     source: "docker-compose.yaml,.env"
     #     target: "yamdb"
-    - name: Execute remote ssh commands to deploy yamdb service
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USER }}
-        key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.PASSPHRASE }}
-        script: |
-          sudo docker-compose up -d
+    # - name: Execute remote ssh commands to deploy yamdb service
+    #   uses: appleboy/ssh-action@master
+    #   with:
+    #     host: ${{ secrets.HOST }}
+    #     username: ${{ secrets.USER }}
+    #     key: ${{ secrets.SSH_KEY }}
+    #     passphrase: ${{ secrets.PASSPHRASE }}
+    #     script: |
+    #       sudo docker-compose up -d
 
 
   notify:
