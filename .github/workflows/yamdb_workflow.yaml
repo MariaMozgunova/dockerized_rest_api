@@ -69,7 +69,7 @@ jobs:
         args: up -d
         pre_deployment_command_args: 'sudo docker-compose build'
         docker_prune: 'true'
-        pull_images_first: 'true'
+        # pull_images_first: 'true'
     # - uses: actions/checkout@v2
     # - uses: isbang/compose-action@v0.1
     #   with:

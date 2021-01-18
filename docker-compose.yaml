@@ -35,6 +35,7 @@ services:
     depends_on:
       - db
       - nginx
+    image: mariamozgunova/yamdb-final:latest
     restart: always
     ports:
       - "8000:8000"
