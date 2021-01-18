@@ -57,7 +57,7 @@
 ### Заполнение базы начальными данными
 
 1. Подключитесь к своему серверу по ssh (`ssh <пользователь_сервера>@<public_ip_сервера>`, затем введите passphrase от ssh key);
-2. Выполните вход в контейнер командой `docker exec -it yamdb-web-final bash`. Если вы переименовали контейнер Django приложения, измените значение `yamdb-web-final`;
+2. Выполните вход в контейнер командой `docker exec -it yamdb-web bash`. Если вы переименовали контейнер Django приложения, измените значение `yamdb-web`;
 3. Выполните миграции `python3 manage.py migrate`;
 4. В файле initial_data.json подготовлены начальные данные, загрузите их в базу `python manage.py loaddata initial_data.json`;
 
@@ -138,7 +138,7 @@ Perfect! It works.
 ### Add initial data to your database
 
 1. Connect to your server via ssh (`ssh <username>@<public_ip>`, then type your passphrase);
-2. Connect to your container where Django app is currently running `docker exec -it yamdb-web-final bash`;
+2. Connect to your container where Django app is currently running `docker exec -it yamdb-web bash`;
 3. Apply migrations `python3 manage.py migrate`;
 4. Load initial data from initial_data.json `python manage.py loaddata initial_data.json`;
 

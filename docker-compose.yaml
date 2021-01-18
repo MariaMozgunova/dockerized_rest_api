@@ -17,31 +17,36 @@ services:
   nginx:
     image: nginx:1.19.6-alpine
     volumes:
-      - static:${ROOT}/static/
+      # - static:${ROOT}/static/
       - media:${ROOT}/media/
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/static:${ROOT}/static
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - "80:80"
     environment:
+      - DOMAIN
       - HOST
+      - WWWDOMAIN
     
 
   web:
+    build: .
+    container_name: yamdb-web
     depends_on:
       - db
       - nginx
-    image: mariamozgunova/yamdb-final:latest
     restart: always
     ports:
       - "8000:8000"
     environment:
-      - HOST
-      - POSTGRES_USER
-      - POSTGRES_PASSWORD
       - DB_ENGINE
-      - DB_NAME
       - DB_HOST
+      - DB_NAME
       - DB_PORT
-      - SECRET_KEY
       - DEBUG
+      - DOMAIN
+      - HOST
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - SECRET_KEY
+      - WWWDOMAIN
