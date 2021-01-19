@@ -60,10 +60,10 @@ jobs:
     needs: tests
     steps:
     - name: Setup SSH
-      uses: MrSquaare/ssh-setup-action@v1
+      uses: kielabokkie/ssh-key-and-known-hosts-action@v1
       with:
-        host: ${{ secrets.USER }}@${{ secrets.HOST }}
-        private-key: ${{ secrets.SSH_KEY }}
+        ssh-private-key: ${{ secrets.SSH_KEY }}
+        ssh-host: ${{ secrets.USER }}@${{ secrets.HOST }}
     - uses: actions/checkout@v2
     - name: Run docker-compose
       uses: sudo-bot/action-docker-compose@latest
