@@ -91,7 +91,7 @@ jobs:
         deployment_mode: docker-compose
         args: up -d
         pre_deployment_command_args: 'sudo docker-compose build'
-        docker_prune: 'true'
+        docker_prune: 'false'
         # pull_images_first: 'true'
     # - uses: isbang/compose-action@v0.1
     #   with:
