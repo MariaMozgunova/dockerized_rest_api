@@ -44,7 +44,7 @@ services:
   nginx:
     depends_on:
         - web
-    image: nginx:1.19.6-alpine
+    # image: nginx:1.19.6-alpine
     volumes:
       # - static:${ROOT}/static/
       - media:${ROOT}/media
