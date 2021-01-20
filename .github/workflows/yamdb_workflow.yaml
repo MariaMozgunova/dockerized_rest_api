@@ -60,28 +60,28 @@ jobs:
     needs: tests
     steps:
     - uses: actions/checkout@v2
-    - name: Setup SSH
-      uses: kielabokkie/ssh-key-and-known-hosts-action@v1
-      with:
-        ssh-private-key: ${{ secrets.SSH_KEY }}
-        ssh-host: ${{ secrets.USER }}@${{ secrets.HOST }}
-    - name: Run docker-compose
-      uses: sudo-bot/action-docker-compose@latest
-      with:
-          cli-args: "build"
-    - name: Run docker-compose
-      uses: sudo-bot/action-docker-compose@latest
-      with:
-          cli-args: "up -d"
-    # - name: Execute remote ssh commands to deploy yamdb service
-    #   uses: appleboy/ssh-action@master
+    # - name: Setup SSH
+    #   uses: kielabokkie/ssh-key-and-known-hosts-action@v1
     #   with:
-    #     host: ${{ secrets.HOST }}
-    #     username: ${{ secrets.USER }}
-    #     key: ${{ secrets.SSH_KEY }}
-    #     passphrase: ${{ secrets.PASSPHRASE }}
-        # script: |
-        #   sudo docker-compose up -d
+    #     ssh-private-key: ${{ secrets.SSH_KEY }}
+    #     ssh-host: ${{ secrets.USER }}@${{ secrets.HOST }}
+    # - name: Run docker-compose
+    #   uses: sudo-bot/action-docker-compose@latest
+    #   with:
+    #       cli-args: "build"
+    # - name: Run docker-compose
+    #   uses: sudo-bot/action-docker-compose@latest
+    #   with:
+    #       cli-args: "up -d"
+    - name: Execute remote ssh commands to deploy yamdb service
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        script: |
+          sudo docker-compose up -d
     # - name: Deploy to Docker Host
     #   uses: wshihadeh/docker-deployment-action@v1
     #   with:
