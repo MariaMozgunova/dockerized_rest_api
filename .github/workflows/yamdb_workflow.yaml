@@ -82,8 +82,8 @@ jobs:
           sudo docker-compose down
           sudo docker-compose pull
           sudo docker-compose up -d
-          sudo docker-compose exec yamdb-web python manage.py makemigrations
-          sudo docker-compose exec yamdb-web python manage.py migrate
+          sudo docker exec yamdb-web python manage.py makemigrations
+          sudo docker exec yamdb-web python manage.py migrate
     # - name: Deploy to Docker Host
     #   uses: wshihadeh/docker-deployment-action@v1
     #   with:
