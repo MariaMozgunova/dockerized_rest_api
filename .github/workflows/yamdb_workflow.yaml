@@ -68,7 +68,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        source: "docker-compose.yaml,nginx/nginx.conf,.env,redoc.yaml"
+        source: "docker-compose.yaml,nginx/nginx.conf,.env"
         target: "yamdb"
     - name: Execute remote ssh commands to deploy yamdb service
       uses: appleboy/ssh-action@master
