@@ -60,32 +60,44 @@ jobs:
     needs: tests
     steps:
     - uses: actions/checkout@v2
-    - name: Run a multi-line script
-      run: |
-        mkdir ../yamdb
-        cp -TR . ../yamdb
-        tar -cvf yamdb.tar ../yamdb/
-    - name: Copy docker-compose.yaml to server via SSH
-      uses: appleboy/scp-action@master
+    - name: Deploy to Docker Host
+      uses: wshihadeh/docker-deployment-action@v1
       with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USER }}
-        key: ${{ secrets.SSH_KEY }}
-        source: "yamdb.tar"
-        target: "."
-    - name: Execute remote ssh commands to deploy yamdb service
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USER }}
-        key: ${{ secrets.SSH_KEY }}
-        passphrase: ${{ secrets.PASSPHRASE }}
-        script: |
-          sudo docker rm -f $(sudo docker ps -a -q)
-          tar -xvf yamdb.tar
-          cd yamdb
-          sudo docker-compose build
-          sudo docker-compose up -d
+        remote_docker_host: admin@178.154.235.5
+        ssh_private_key: ${{ secrets.RSA_PRIVATE_KEY }}
+        ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+        copy_stack_file: 'true'
+        deploy_path: '~/yamdb'
+        deployment_mode: docker-compose
+        pre_deployment_command_args: 'sudo docker-compose build'
+        args: up -d
+        docker_prune: 'false'
+    # - name: Run a multi-line script
+    #   run: |
+    #     mkdir ../yamdb
+    #     cp -TR . ../yamdb
+    #     tar -cvf yamdb.tar ../yamdb/
+    # - name: Copy docker-compose.yaml to server via SSH
+    #   uses: appleboy/scp-action@master
+    #   with:
+    #     host: ${{ secrets.HOST }}
+    #     username: ${{ secrets.USER }}
+    #     key: ${{ secrets.SSH_KEY }}
+    #     source: "yamdb.tar"
+    #     target: "."
+    # - name: Execute remote ssh commands to deploy yamdb service
+    #   uses: appleboy/ssh-action@master
+    #   with:
+    #     host: ${{ secrets.HOST }}
+    #     username: ${{ secrets.USER }}
+    #     key: ${{ secrets.SSH_KEY }}
+    #     passphrase: ${{ secrets.PASSPHRASE }}
+    #     script: |
+    #       sudo docker rm -f $(sudo docker ps -a -q)
+    #       tar -xvf yamdb.tar
+    #       cd yamdb
+    #       sudo docker-compose build
+    #       sudo docker-compose up -d
     # - name: Setup SSH
     #   uses: kielabokkie/ssh-key-and-known-hosts-action@v1
     #   with:
@@ -99,16 +111,6 @@ jobs:
     #   uses: sudo-bot/action-docker-compose@latest
     #   with:
     #       cli-args: "up -d"
-    # - name: Deploy to Docker Host
-    #   uses: wshihadeh/docker-deployment-action@v1
-    #   with:
-    #     remote_docker_host: admin@178.154.235.5
-    #     ssh_private_key: ${{ secrets.RSA_PRIVATE_KEY }}
-    #     ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-    #     deployment_mode: docker-compose
-    #     args: up -d
-    #     pre_deployment_command_args: 'sudo docker-compose build'
-    #     docker_prune: 'false'
         # pull_images_first: 'true'
     # - uses: isbang/compose-action@v0.1
     #   with:
