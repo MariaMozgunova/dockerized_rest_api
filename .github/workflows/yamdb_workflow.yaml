@@ -69,7 +69,7 @@ jobs:
         copy_stack_file: 'true'
         deploy_path: '~/yamdb'
         deployment_mode: docker-compose
-        pre_deployment_command_args: 'sudo docker-compose build'
+        pre_deployment_command_args: 'build'
         args: up -d
         docker_prune: 'false'
     # - name: Run a multi-line script
