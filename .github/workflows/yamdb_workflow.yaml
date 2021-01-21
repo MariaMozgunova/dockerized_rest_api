@@ -68,8 +68,9 @@ jobs:
         ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
         copy_stack_file: 'true'
         deploy_path: '~/yamdb'
+        keep_files: 100
         deployment_mode: docker-compose
-        pre_deployment_command_args: 'build'
+        # pre_deployment_command_args: 'build'
         args: up -d
         docker_prune: 'false'
     # - name: Run a multi-line script
