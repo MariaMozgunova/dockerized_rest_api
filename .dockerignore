@@ -4,7 +4,6 @@ Dockerfile
 README.md
 nginx/
 .github/
-redoc.yaml
 
 tests/
 pytest.ini
