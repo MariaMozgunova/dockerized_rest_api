@@ -17,11 +17,11 @@ services:
       - POSTGRES_USER
 
   web:
-    build: .
+    # build: .
     container_name: yamdb-web
     depends_on:
       - db
-    # image: mariamozgunova/yamdb-final:latest
+    image: mariamozgunova/yamdb-final:latest
     restart: always
     ports:
       - "8000:8000"
