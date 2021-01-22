@@ -23,8 +23,8 @@ services:
       - db
     image: mariamozgunova/yamdb-final:latest
     restart: always
-    ports:
-      - "8000:8000"
+    # ports:
+    #   - "8000:8000"
     environment:
       - DB_ENGINE
       - DB_HOST
