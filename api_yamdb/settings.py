@@ -30,7 +30,8 @@ ALLOWED_HOSTS = [
     '178.154.235.5',
     'localhost',
     'all-reviews.ml',
-    'www.all-reviews.ml'
+    'www.all-reviews.ml',
+    'yamdb-web',
 ]
 # [
 #     os.environ.get('HOST'),
