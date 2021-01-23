@@ -56,7 +56,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        source: "docker-compose.yaml,nginx/nginx.conf,.env"
+        source: "docker-compose.yaml,nginx/nginx.conf,.env,init-letsencrypt.sh"
         target: "yamdb"
     - name: Execute remote ssh commands to deploy yamdb service
       uses: appleboy/ssh-action@master
@@ -71,7 +71,9 @@ jobs:
           sudo docker-compose pull
           sudo docker-compose up -d
           sudo docker exec yamdb-web python manage.py migrate
-          sudo docker exec yamdb-web cp redoc.yaml static/redoc.yaml
+          sudo docker exec yamdb-web mv redoc.yaml static/redoc.yaml
+          sudo chmod +x init-letsencrypt.sh
+          sudo ./init-letsencrypt.sh
     
 
   notify:
