@@ -43,18 +43,6 @@ jobs:
         with:
           push: true
           tags: mariamozgunova/yamdb-final:latest
-          # build-args: |
-          #   DB_ENGINE=${{ secrets.DB_ENGINE }}
-          #   DB_HOST=${{ secrets.DB_HOST }}
-          #   DB_NAME=${{ secrets.DB_NAME }}
-          #   DB_PORT=${{ secrets.DB_PORT }}
-          #   DEBUG=${{ secrets.DEBUG }}
-          #   DOMAIN=${{ secrets.DOMAIN }}
-          #   HOST=${{ secrets.HOST }}
-          #   POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}
-          #   POSTGRES_USER=${{ secrets.POSTGRES_USER }}
-          #   SECRET_KEY=${{ secrets.SECRET_KEY }}
-          #   WWWDOMAIN=${{ secrets.WWWDOMAIN }}
 
 
   deploy:
@@ -82,45 +70,9 @@ jobs:
           sudo docker-compose down
           sudo docker-compose pull
           sudo docker-compose up -d
-          sudo docker exec yamdb-web python manage.py makemigrations
           sudo docker exec yamdb-web python manage.py migrate
           sudo docker exec yamdb-web cp redoc.yaml static/redoc.yaml
-    # - name: Deploy to Docker Host
-    #   uses: wshihadeh/docker-deployment-action@v1
-    #   with:
-    #     remote_docker_host: admin@178.154.235.5
-    #     ssh_private_key: ${{ secrets.RSA_PRIVATE_KEY }}
-    #     ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-    #     copy_stack_file: 'true'
-    #     deploy_path: '~/yamdb'
-    #     keep_files: 100
-    #     deployment_mode: docker-compose
-    #     # pre_deployment_command_args: 'build'
-    #     args: up -d
-    #     docker_prune: 'false'
-    # - name: Run a multi-line script
-    #   run: |
-    #     mkdir ../yamdb
-    #     cp -TR . ../yamdb
-    #     tar -cvf yamdb.tar ../yamdb/
-    # - name: Setup SSH
-    #   uses: kielabokkie/ssh-key-and-known-hosts-action@v1
-    #   with:
-    #     ssh-private-key: ${{ secrets.SSH_KEY }}
-    #     ssh-host: ${{ secrets.USER }}@${{ secrets.HOST }}
-    # - name: Run docker-compose
-    #   uses: sudo-bot/action-docker-compose@latest
-    #   with:
-    #       cli-args: "build"
-    # - name: Run docker-compose
-    #   uses: sudo-bot/action-docker-compose@latest
-    #   with:
-    #       cli-args: "up -d"
-        # pull_images_first: 'true'
-    # - uses: isbang/compose-action@v0.1
-    #   with:
-    #     compose-file: 'docker-compose.yaml'
-
+    
 
   notify:
     runs-on: ubuntu-latest

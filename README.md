@@ -1,4 +1,4 @@
-Работающий пример/ Working example here -> http://all-reviews.ml/redoc/
+# Проект запущен здесь -> http://all-reviews.ml/redoc/
 
 <details>
 <summary>Документация (ru)</summary>
