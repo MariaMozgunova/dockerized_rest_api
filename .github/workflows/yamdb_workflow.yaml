@@ -54,20 +54,35 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
-        source: "docker-compose.yaml,nginx/nginx.conf,.env,init-letsencrypt.sh"
+        source: "docker-compose.yaml,nginx/nginx.conf,init-letsencrypt.sh"
         target: "yamdb"
     - name: Execute remote ssh commands to deploy yamdb service
       uses: appleboy/ssh-action@master
+      env:
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        POSTGRES_PASSWORD: ${{ secrets.DB_ENGINE }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_HOST: ${{ secrets.DB_HOST }}
+        DB_PORT: ${{ secrets.DB_PORT }}
+        ROOT: ${{ secrets.ROOT }}
+        HOST: ${{ secrets.HOST }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DEBUG: ${{ secrets.DEBUG }}
+        DOMAIN: ${{ secrets.DOMAIN }}
+        WWWDOMAIN: ${{ secrets.WWWDOMAIN }}
+        DJANGO_CONTAINER: ${{ secrets.DJANGO_CONTAINER }}
+        NGINX_CONTAINER: ${{ secrets.NGINX_CONTAINER }}
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
+        envs: POSTGRES_USER,POSTGRES_PASSWORD,DB_NAME,DB_HOST,DB_PORT,ROOT,HOST,SECRET_KEY,DEBUG,DOMAIN,WWWDOMAIN,DJANGO_CONTAINER,NGINX_CONTAINER
         script: |
           cd yamdb
           sudo docker-compose down
           sudo docker-compose pull
-          sudo docker-compose up -d
+          sudo POSTGRES_USER=$POSTGRES_USER POSTGRES_PASSWORD=$POSTGRES_PASSWORD DB_NAME=$DB_NAME DB_HOST=$DB_HOST DB_PORT=$DB_PORT ROOT=$ROOT HOST=$HOST SECRET_KEY=$SECRET_KEY DEBUG=$DEBUG DOMAIN=$DOMAIN WWWDOMAIN=$WWWDOMAIN DJANGO_CONTAINER=$DJANGO_CONTAINER NGINX_CONTAINER=$NGINX_CONTAINER docker-compose up -d
           sudo docker exec yamdb-web python manage.py migrate
           sudo docker exec yamdb-web mv redoc.yaml static/redoc.yaml
           sudo chmod +x init-letsencrypt.sh
