@@ -53,6 +53,3 @@ services:
       - media:${ROOT}/media
       - static:${ROOT}/static
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-
-  certbot:
-    image: certbot/certbot
