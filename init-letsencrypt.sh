@@ -69,4 +69,4 @@ docker-compose run --entrypoint "\
 echo
 
 echo "### Reloading nginx ..."
-docker-compose exec nginx nginx -s reload
+docker-compose exec $NGINX_CONTAINER nginx -s reload
