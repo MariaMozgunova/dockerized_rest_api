@@ -31,6 +31,7 @@ echo
 
 
 echo "### Starting nginx ..."
+echo $NGINX_CONTAINER
 HOST=$HOST DOMAIN=$DOMAIN WWWDOMAIN=$WWWDOMAIN ROOT=$ROOT NGINX_CONTAINER=$NGINX_CONTAINER docker-compose up --force-recreate -d nginx
 echo
 

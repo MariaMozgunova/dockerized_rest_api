@@ -1,7 +1,14 @@
 name: workflow
 
 
-on: [push]
+on: 
+  push:
+    branches:
+      - master
+  
+  workflow_dispatch:
+    branches:
+      - master
 
 
 jobs: 
@@ -59,36 +66,39 @@ jobs:
     - name: Execute remote ssh commands to deploy yamdb service
       uses: appleboy/ssh-action@master
       env:
-        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-        POSTGRES_PASSWORD: ${{ secrets.DB_ENGINE }}
-        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_ENGINE: ${{ secrets.DB_ENGINE }}
         DB_HOST: ${{ secrets.DB_HOST }}
+        DB_NAME: ${{ secrets.DB_NAME }}
         DB_PORT: ${{ secrets.DB_PORT }}
-        ROOT: ${{ secrets.ROOT }}
-        HOST: ${{ secrets.HOST }}
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
         DEBUG: ${{ secrets.DEBUG }}
-        DOMAIN: ${{ secrets.DOMAIN }}
-        WWWDOMAIN: ${{ secrets.WWWDOMAIN }}
         DJANGO_CONTAINER: ${{ secrets.DJANGO_CONTAINER }}
+        DOMAIN: ${{ secrets.DOMAIN }}
+        HOST: ${{ secrets.HOST }}
         NGINX_CONTAINER: ${{ secrets.NGINX_CONTAINER }}
+        POSTGRES_PASSWORD: ${{ secrets.DB_ENGINE }}
+        POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+        ROOT: ${{ secrets.ROOT }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        WWWDOMAIN: ${{ secrets.WWWDOMAIN }}
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
-        envs: DB_HOST,DB_NAME,DB_PORT,DEBUG,DJANGO_CONTAINER,DOMAIN,HOST,NGINX_CONTAINER,POSTGRES_PASSWORD,POSTGRES_USER,ROOT,SECRET_KEY,WWWDOMAIN
+        envs: DB_ENGINE,DB_HOST,DB_NAME,DB_PORT,DEBUG,DJANGO_CONTAINER,DOMAIN,HOST,NGINX_CONTAINER,POSTGRES_PASSWORD,POSTGRES_USER,ROOT,SECRET_KEY,WWWDOMAIN
         script: |
           cd yamdb
+          echo $NGINX_CONTAINER
           sudo docker-compose down
           sudo docker-compose pull web
-          sudo POSTGRES_USER=$POSTGRES_USER POSTGRES_PASSWORD=$POSTGRES_PASSWORD DB_NAME=$DB_NAME DB_HOST=$DB_HOST DB_PORT=$DB_PORT ROOT=$ROOT SECRET_KEY=$SECRET_KEY DEBUG=$DEBUG DJANGO_CONTAINER=$DJANGO_CONTAINER NGINX_CONTAINER=$NGINX_CONTAINER docker-compose up -d web
+          sudo DB_ENGINE=$DB_ENGINE DB_HOST=$DB_HOST DB_NAME=$DB_NAME DB_PORT=$DB_PORT DEBUG=$DEBUG DJANGO_CONTAINER=$DJANGO_CONTAINER NGINX_CONTAINER=$NGINX_CONTAINER POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_USER=$POSTGRES_USER ROOT=$ROOT SECRET_KEY=$SECRET_KEY docker-compose up -d web
           sudo chmod +x init-letsencrypt.sh
           export DOMAIN=$DOMAIN
           export HOST=$HOST
           export NGINX_CONTAINER=$NGINX_CONTAINER
           export ROOT=$ROOT
           export WWWDOMAIN=$WWWDOMAIN
+          echo $NGINX_CONTAINER
           sudo ./init-letsencrypt.sh
           sudo docker exec $DJANGO_CONTAINER python manage.py migrate
           sudo docker exec $DJANGO_CONTAINER mv redoc.yaml static/redoc.yaml
