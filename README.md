@@ -1,4 +1,4 @@
-# Проект запущен здесь -> http://all-reviews.ml/redoc/
+### Этот сервис запущен на сервере / This service is deployed on the remote server -> http://all-reviews.ml/redoc/
 
 <details>
 <summary>Документация (ru)</summary>
