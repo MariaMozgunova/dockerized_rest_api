@@ -22,11 +22,12 @@
 - аккаунт на DockerHub.
 
 #### Настройка сервера
-1. Подключитесь к своему серверу по ssh (`ssh <пользователь_сервера>@<public_ip_сервера>`, затем введите passphrase от ssh key);
+1. Подключитесь к своему серверу по ssh (`ssh <пользователь_сервера>@<public_ip_сервера>`, затем введите passphrase от ssh key или пароль);
 2. Обновите индекс пакетов APT: `apt-get update`;
 3. Теперь обновите существующие в системе пакеты и установите обновления: `apt-get upgrade -y`;
-4. Установите пакет sudo, Docker и docker-compose: `apt-get install -y docker.io docker-compose sudo`;
+4. Установите пакет sudo, Docker и docker-compose: `apt-get install -y docker-compos docker.ioe sudo`;
 5. Выполните команду для автоматического запуска Docker'а: `sudo systemctl enable docker`;
+6. 
 
 #### Запуск сервиса
 1. Создайте fork проекта;
