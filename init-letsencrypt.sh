@@ -11,14 +11,6 @@ data_path="./data/certbot"
 email="bagira_2003@inbox.ru"
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
-if [ -d "$data_path" ]; then
-  read -p "Existing data found for $domains. Continue and replace existing certificate? (y/N) " decision
-  if [ "$decision" != "Y" ] && [ "$decision" != "y" ]; then
-    exit
-  fi
-fi
-
-
 if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/ssl-dhparams.pem" ]; then
   echo "### Downloading recommended TLS parameters ..."
   mkdir -p "$data_path/conf"
@@ -39,7 +31,7 @@ echo
 
 
 echo "### Starting nginx ..."
-docker-compose up --force-recreate -d nginx
+HOST=$HOST DOMAIN=$DOMAIN WWWDOMAIN=$WWWDOMAIN docker-compose up --force-recreate -d nginx
 echo
 
 echo "### Deleting dummy certificate for $domains ..."

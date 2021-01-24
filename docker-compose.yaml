@@ -26,8 +26,8 @@ services:
   nginx:
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     container_name: ${NGINX_CONTAINER}
-    depends_on:
-      - web
+    # depends_on:
+    #   - web
     environment:
       - DOMAIN
       - HOST
@@ -55,12 +55,12 @@ services:
       - DB_NAME
       - DB_PORT
       - DEBUG
-      - DOMAIN
-      - HOST
+      # - DOMAIN
+      # - HOST
       - POSTGRES_PASSWORD
       - POSTGRES_USER
       - SECRET_KEY
-      - WWWDOMAIN    
+      # - WWWDOMAIN    
     volumes:
       - static:/code/static
       - media:/code/media
