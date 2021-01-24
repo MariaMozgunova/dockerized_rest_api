@@ -27,7 +27,13 @@
 3. Теперь обновите существующие в системе пакеты и установите обновления: `apt-get upgrade -y`;
 4. Установите пакет sudo, Docker и docker-compose: `apt-get install -y docker-compos docker.ioe sudo`;
 5. Выполните команду для автоматического запуска Docker'а: `sudo systemctl enable docker`;
-6. 
+6. Остановите nginx (если этого не сделать, Docker контейнер `nginx` не запустится): `sudo systemctl disable nginx`;
+7. Сейчас запустим firewall. Разрешите запросы по протоколам http, https и ssh:
+   ```
+   sudo ufw allow 'Nginx Full'
+   sudo ufw allow OpenSSH
+   ```
+8. Включите firewall: `sudo ufw enable `.
 
 #### Запуск сервиса
 1. Создайте fork проекта;
