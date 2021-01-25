@@ -30,6 +30,7 @@ services:
       - DOMAIN
       - HOST
       - WWWDOMAIN
+      - DJANGO_CONTAINER
     image: nginx:1.19.6-alpine
     ports:
       - "80:80"

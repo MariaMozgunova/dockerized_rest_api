@@ -91,9 +91,10 @@ jobs:
           cd yamdb
           sudo docker-compose down
           sudo docker-compose pull web
-          sudo DB_ENGINE=$DB_ENGINE DB_HOST=$DB_HOST DB_NAME=$DB_NAME DB_PORT=$DB_PORT DEBUG=$DEBUG DJANGO_CONTAINER=$DJANGO_CONTAINER NGINX_CONTAINER=$NGINX_CONTAINER POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_USER=$POSTGRES_USER ROOT=$ROOT SECRET_KEY=$SECRET_KEY docker-compose up -d web
+          sudo DB_ENGINE=$DB_ENGINE DB_HOST=$DB_HOST DB_NAME=$DB_NAME DB_PORT=$DB_PORT DEBUG=$DEBUG DJANGO_CONTAINER=$DJANGO_CONTAINER POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_USER=$POSTGRES_USER SECRET_KEY=$SECRET_KEY docker-compose up -d web
           sudo chmod +x init-letsencrypt.sh
-          sudo DOMAIN=$DOMAIN EMAIL=$EMAIL HOST=$HOST NGINX_CONTAINER=$NGINX_CONTAINER ROOT=$ROOT WWWDOMAIN=$WWWDOMAIN ./init-letsencrypt.sh
+          sudo DJANGO_CONTAINER=$DJANGO_CONTAINER DOMAIN=$DOMAIN EMAIL=$EMAIL HOST=$HOST NGINX_CONTAINER=$NGINX_CONTAINER ROOT=$ROOT WWWDOMAIN=$WWWDOMAIN ./init-letsencrypt.sh
+          echo 'COntinue'
           sudo docker-compose exec web mv redoc.yaml static/redoc.yaml
           sudo docker-compose exec web python manage.py migrate
           
