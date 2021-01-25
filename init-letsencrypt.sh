@@ -5,10 +5,10 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(all-reviews.ml www.all-reviews.ml)
+domains=($DOMAIN $WWWDOMAIN)
 rsa_key_size=4096
 data_path="./data/certbot"
-email="bagira_2003@inbox.ru"
+email=$EMAIL
 staging=0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 if [ ! -e "$data_path/conf/options-ssl-nginx.conf" ] || [ ! -e "$data_path/conf/ssl-dhparams.pem" ]; then

@@ -51,6 +51,7 @@ services:
     restart: always
     environment:
       - DB_ENGINE
+      - DJANGO_CONTAINER
       - DB_HOST
       - DB_NAME
       - DB_PORT
