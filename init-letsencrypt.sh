@@ -31,7 +31,7 @@ echo
 
 
 echo "### Starting nginx ..."
-HOST=$HOST DOMAIN=$DOMAIN WWWDOMAIN=$WWWDOMAIN ROOT=$ROOT NGINX_CONTAINER=$NGINX_CONTAINER docker-compose up --force-recreate -d nginx
+DJANGO_CONTAINER=$DJANGO_CONTAINER HOST=$HOST DOMAIN=$DOMAIN WWWDOMAIN=$WWWDOMAIN ROOT=$ROOT NGINX_CONTAINER=$NGINX_CONTAINER docker-compose up --force-recreate -d nginx
 echo
 
 echo "### Deleting dummy certificate for $domains ..."

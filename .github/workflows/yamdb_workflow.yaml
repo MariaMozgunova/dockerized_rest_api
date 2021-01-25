@@ -95,8 +95,8 @@ jobs:
           sudo chmod +x init-letsencrypt.sh
           sudo DJANGO_CONTAINER=$DJANGO_CONTAINER DOMAIN=$DOMAIN EMAIL=$EMAIL HOST=$HOST NGINX_CONTAINER=$NGINX_CONTAINER ROOT=$ROOT WWWDOMAIN=$WWWDOMAIN ./init-letsencrypt.sh
           echo 'COntinue'
-          sudo docker-compose exec web mv redoc.yaml static/redoc.yaml
-          sudo docker-compose exec web python manage.py migrate
+          sudo docker exec $DJANGO_CONTAINER mv redoc.yaml static/redoc.yaml
+          sudo docker exec $DJANGO_CONTAINER python manage.py migrate
           
 
   notify:
