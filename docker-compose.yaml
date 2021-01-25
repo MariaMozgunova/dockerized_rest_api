@@ -9,7 +9,7 @@ volumes:
 
 services:
   certbot:
-    command: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
     image: certbot/certbot
     volumes:
       - ./data/certbot/conf:/etc/letsencrypt
@@ -26,8 +26,6 @@ services:
   nginx:
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     container_name: ${NGINX_CONTAINER}
-    # depends_on:
-    #   - web
     environment:
       - DOMAIN
       - HOST
@@ -56,12 +54,9 @@ services:
       - DB_NAME
       - DB_PORT
       - DEBUG
-      # - DOMAIN
-      # - HOST
       - POSTGRES_PASSWORD
       - POSTGRES_USER
-      - SECRET_KEY
-      # - WWWDOMAIN    
+      - SECRET_KEY  
     volumes:
       - static:/code/static
       - media:/code/media

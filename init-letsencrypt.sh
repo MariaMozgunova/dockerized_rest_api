@@ -69,4 +69,7 @@ docker-compose run --rm --entrypoint "\
 echo
 
 echo "### Reloading nginx ..."
-docker-compose exec $NGINX_CONTAINER nginx -s reload
+docker-compose exec nginx nginx -s reload
+
+echo "### Starting certbot, so that it can check the expiration of SSL certificate ..."
+docker-compose up -d certbot
