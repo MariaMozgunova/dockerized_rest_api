@@ -22,7 +22,7 @@
 - аккаунт на DockerHub.
 
 #### Настройка сервера
-1. Подключитесь к своему серверу по ssh (`ssh <пользователь_сервера>@<public_ip_сервера>`, затем введите passphrase от ssh key или пароль);
+1. Подключитесь к своему серверу по ssh (`ssh <пользователь_сервера>@<public_ip_сервера>`, затем введите passphrase от ssh key). Для дальнейшей работу у вас должен быть доступ именно по ключу, а не по паролю;
 2. Обновите индекс пакетов APT: `apt-get update`;
 3. Теперь обновите существующие в системе пакеты и установите обновления: `apt-get upgrade -y`;
 4. Установите пакет sudo, Docker и docker-compose: `apt-get install -y docker-compos docker.ioe sudo`;
@@ -40,17 +40,22 @@
 2. В fork перейдите в Settings > Secrets и сконфигурируйте следующие константы для работы workflow: # TODO: finish describing env vars
    - `DOCKER_USERNAME` - логин от DockerHub;
    - `DOCKER_PASSWORD` - пароль от DockerHub;
+
    - `DB_ENGINE` - система управления базой данных;
    - `DB_HOST` - путь до базы данных (в данном случае указываем название контейнера, в котором она расположена - `db`);
    - `DB_NAME` - название базы данных, в которой будут сохраняться записи;
    - `DB_PORT` - порт для подключения к базе данных;
    - `POSTGRES_USER` - пользователь с полными правами к базе данных;
-   - `POSTGRES_PASSWORD` - пароль пользователя `POSTGRES_USER`;
+   - `POSTGRES_PASSWORD` - пароль пользователя `POSTGRES_USER`, если вы используете PostgreSQL, то не изменяйте названия переменных `POSTGRES_USER` и `POSTGRES_PASSWORD`;
+
    - `DEBUG` - 0 - запуск сервиса в отладочном режиме, 1 - запуск сервиса в рабочем режиме;
+   - `SECRET_KEY` - 
+   
    - `HOST` - ip сервера;
    - `SSH_KEY` - private ssh key для подключения к серверу;
    - `PASSPHRASE` - passphrase к private ssh key;
    - `USER` - пользователь сервера;
+
    - `SLACK_TO` - id чата с Slack Bot;
    - `SLACK_TOKEN` - токен бота, установленного в workspace;
    - `TELEGRAM_TO` - id чата с Telegram Bot;
