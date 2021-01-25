@@ -27,10 +27,10 @@ services:
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     container_name: ${NGINX_CONTAINER}
     environment:
+      - DJANGO_CONTAINER
       - DOMAIN
       - HOST
       - WWWDOMAIN
-      - DJANGO_CONTAINER
     image: nginx:1.19.6-alpine
     ports:
       - "80:80"
