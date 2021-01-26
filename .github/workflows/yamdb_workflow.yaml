@@ -86,7 +86,7 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
-        envs: DB_ENGINE,DB_HOST,DB_NAME,DB_PORT,DEBUG,DJANGO_CONTAINER,DOMAIN,HOST,NGINX_CONTAINER,POSTGRES_PASSWORD,POSTGRES_USER,ROOT,SECRET_KEY,WWWDOMAIN
+        envs: DB_ENGINE,DB_HOST,DB_NAME,DB_PORT,DEBUG,DJANGO_CONTAINER,DOMAIN,EMAIL,HOST,NGINX_CONTAINER,POSTGRES_PASSWORD,POSTGRES_USER,ROOT,SECRET_KEY,WWWDOMAIN
         script: |
           cd yamdb
           sudo docker-compose down
