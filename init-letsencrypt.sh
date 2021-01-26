@@ -29,6 +29,8 @@ docker-compose run --rm --entrypoint "\
     -subj '/CN=localhost'" certbot
 echo
 
+envsubst '$DOMAIN $WWWDOMAIN $NGINX_CONTAINER $DJANGO_CONTAINER $HOST' < ./nginx/nginx.conf > ./nginx/nginx.temp && mv ./nginx/nginx.temp ./nginx/nginx.conf
+
 
 echo "### Starting nginx ..."
 DJANGO_CONTAINER=$DJANGO_CONTAINER HOST=$HOST DOMAIN=$DOMAIN WWWDOMAIN=$WWWDOMAIN ROOT=$ROOT NGINX_CONTAINER=$NGINX_CONTAINER docker-compose up --force-recreate -d nginx

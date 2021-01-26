@@ -68,7 +68,8 @@
    - `PASSPHRASE` - passphrase к private ssh key;
    - `USER` - пользователь сервера;
 
-   - `NGINX_CONTAINER` - название контейнера с Django приложением;
+   - `DJANGO_CONTAINER` - название контейнера с Django приложением;
+   - `NGINX_CONTAINER` - название контейнера с Nginx сервером;
 
    - `SLACK_TO` - id чата с Slack Bot;
    - `SLACK_TOKEN` - токен бота, установленного в workspace;
@@ -85,9 +86,7 @@
 ### Заполнение базы начальными данными
 
 1. Подключитесь к своему серверу по ssh (`ssh <пользователь_сервера>@<public_ip_сервера>`, затем введите passphrase от ssh key);
-2. Выполните вход в контейнер командой `docker exec -it yamdb-web bash`. Если вы переименовали контейнер Django приложения, измените значение `yamdb-web`;
-3. Выполните миграции `python3 manage.py migrate`;
-4. В файле initial_data.json подготовлены начальные данные, загрузите их в базу `python manage.py loaddata initial_data.json`;
+2. Выполните вход в контейнер командой `docker exec -it DJANGO_CONTAINER python manage.py loaddata initial_data.json`;
 
 Если вы хотите создать свои тестовые данные, посмотрите [статью RealPython](https://realpython.com/data-migrations/#examples).
 Также вы можете создать данные через shell, импортировав модели: `python manage.py shell`.
@@ -95,7 +94,7 @@
 ### Создания суперпользователя контейнера
 
 Если вы, находясь в docker-контейнере, захотите создать суперпользователя, выполните следующие действия:
-   - Установите пакет sudo `apt-get install -y sudo`;
+   - Установите пакет sudo, если ещё не сделали этого `apt-get install -y sudo`;
    - Создайте пользователя `adduser <username>`;
    - Добавьте нового пользователя в группу sudo `usermod -aG sudo <username>`.
    
