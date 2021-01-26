@@ -92,6 +92,7 @@ jobs:
           sudo docker-compose down
           sudo docker-compose pull web
           sudo DB_ENGINE=$DB_ENGINE DB_HOST=$DB_HOST DB_NAME=$DB_NAME DB_PORT=$DB_PORT DEBUG=$DEBUG DJANGO_CONTAINER=$DJANGO_CONTAINER POSTGRES_PASSWORD=$POSTGRES_PASSWORD POSTGRES_USER=$POSTGRES_USER SECRET_KEY=$SECRET_KEY docker-compose up -d web
+          envsubst '$DOMAIN $WWWDOMAIN $NGINX_CONTAINER $DJANGO_CONTAINER $HOST' < ./nginx/nginx.conf > ./nginx/nginx.temp && mv ./nginx/nginx.temp ./nginx/nginx.conf
           sudo chmod +x init-letsencrypt.sh
           sudo DJANGO_CONTAINER=$DJANGO_CONTAINER DOMAIN=$DOMAIN EMAIL=$EMAIL HOST=$HOST NGINX_CONTAINER=$NGINX_CONTAINER ROOT=$ROOT WWWDOMAIN=$WWWDOMAIN ./init-letsencrypt.sh
           sudo docker exec $DJANGO_CONTAINER mv redoc.yaml static/redoc.yaml
