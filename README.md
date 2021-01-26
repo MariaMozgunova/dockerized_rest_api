@@ -1,4 +1,4 @@
-Этот сервис запущен на сервере / This service is deployed on the remote server -> http://all-reviews.ml/redoc/
+Посетите работающую версию сайта / Visit this website deploployed to the remote server -> https://all-reviews.ml/redoc/
 
 <details>
 <summary>Документация (ru)</summary>
