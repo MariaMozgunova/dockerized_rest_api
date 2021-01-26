@@ -8,8 +8,8 @@
 ![CI/CD workflow](https://github.com/MariaMozgunova/yamdb_final/workflows/workflow/badge.svg)
 
 Докеризированный сервис API отзывов о фильмах, книгах и песнях. Nginx раздаёт статику, Gunicorn передаёт запросы Django-приложению. Данные хранятся в базе данных PostgreSQL. Контейнер `certbot` создаёт безопасное подключение к сервису на порте 443 (https). Написала GitHub Actions workflow, который:
-- проверяет код на соответствие PEP 8;
-- строит Docker images, определенные в `docker-compose.yaml` и пушит их на Docker Hub;
+- Проверяет код на соответствие PEP 8;
+- Строит Docker images, определенные в `docker-compose.yaml` и пушит их на Docker Hub;
 - Копирует необходимые для запуска проекта файлы на сервер;
 - Скачивает images из Docker Hub;
 - Запускает контейнеры;
@@ -113,7 +113,9 @@
 
 ![CI/CD workflow](https://github.com/MariaMozgunova/yamdb_final/workflows/workflow/badge.svg)
 
-This is the dockerized API service storing reviews about books, music and films. Nginx delivers static files and proxies other requests to Django app. All data is stored in PostgreSQL database.  
+This is the dockerized API service storing reviews about books, music and films. Nginx delivers static files and proxies other requests to Django app. All data is stored in PostgreSQL database. The secure http connection is maintained by the `certbot` Docker container. Therer is GitHub Actions workflow which:
+- Linters the code agianst PEP 8;
+- 
 
 ### Getting Started
 
