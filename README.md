@@ -45,7 +45,7 @@
 
 #### Запуск сервиса
 1. Создайте fork проекта;
-2. В fork перейдите в Settings > Secrets и сконфигурируйте следующие константы для работы workflow: # TODO: finish describing env vars
+2. В fork перейдите в Settings > Secrets и сконфигурируйте следующие константы для работы workflow:
    - `DOCKER_USERNAME` - логин от DockerHub;
    - `DOCKER_PASSWORD` - пароль от DockerHub;
 
@@ -57,12 +57,18 @@
    - `POSTGRES_PASSWORD` - пароль пользователя `POSTGRES_USER`, если вы используете PostgreSQL, то не изменяйте названия переменных `POSTGRES_USER` и `POSTGRES_PASSWORD`;
 
    - `DEBUG` - 0 - запуск сервиса в отладочном режиме, 1 - запуск сервиса в рабочем режиме;
-   - `SECRET_KEY` - 
+   - `SECRET_KEY` - можно сгенерировать здесь [Djecrety](https://djecrety.ir/);
+
+   - `DOMAIN` - домен вашего сайта;
+   - `EMAIL` - почта используется для создания SSL сертификата Let`s Encrypt;
+   - `WWWDOMAIN` - тоже самое, что и `DOMAIN`, только с префиксом `www.`;
    
    - `HOST` - ip сервера;
    - `SSH_KEY` - private ssh key для подключения к серверу;
    - `PASSPHRASE` - passphrase к private ssh key;
    - `USER` - пользователь сервера;
+
+   - `NGINX_CONTAINER` - название контейнера с Django приложением;
 
    - `SLACK_TO` - id чата с Slack Bot;
    - `SLACK_TOKEN` - токен бота, установленного в workspace;
