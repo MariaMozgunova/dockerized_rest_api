@@ -29,11 +29,9 @@ docker-compose run --rm --entrypoint "\
     -subj '/CN=localhost'" certbot
 echo
 
-echo "### Substitute env vars in nginx.conf ..."
-envsubst '$DJANGO_CONTAINER $DOMAIN $HOST $NGINX_CONTAINER $WWWDOMAIN' < ./nginx/nginx.conf > ./nginx/nginx.conf
 
 echo "### Starting nginx ..."
-NGINX_CONTAINER=$NGINX_CONTAINER ROOT=$ROOT docker-compose up --force-recreate -d nginx
+DJANGO_CONTAINER=$DJANGO_CONTAINER HOST=$HOST DOMAIN=$DOMAIN WWWDOMAIN=$WWWDOMAIN ROOT=$ROOT NGINX_CONTAINER=$NGINX_CONTAINER docker-compose up --force-recreate -d nginx
 echo
 
 echo "### Deleting dummy certificate for $domains ..."

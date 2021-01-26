@@ -24,8 +24,13 @@ services:
       - POSTGRES_USER
 
   nginx:
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    command: "/bin/sh -c 'envsubst \'$DJANGO_CONTAINER $DOMAIN $HOST $NGINX_CONTAINER $WWWDOMAIN\' < ./nginx/nginx.conf > ./nginx/nginx.conf && while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
     container_name: ${NGINX_CONTAINER}
+    environment:
+      - DJANGO_CONTAINER
+      - DOMAIN
+      - HOST
+      - WWWDOMAIN
     image: nginx:1.19.6-alpine
     ports:
       - "80:80"
