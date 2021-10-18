@@ -1,5 +1,3 @@
-Посетите работающую версию сайта / Visit this website deploployed to the remote server -> https://all-reviews.ml/redoc/
-
 <details>
 <summary>Документация (ru)</summary>
    
